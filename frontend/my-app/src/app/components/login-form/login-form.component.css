@@ -1,0 +1,34 @@
+span {
+  color: #ef6060;
+}
+
+input.ng-invalid.ng-touched {
+  border: red 1px solid;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button-login {
+  background-color: #ffcc00;
+  text-align: center;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-login:hover {
+  background-color: #efbc50;
+  color: white;
+}
+
+.button-login,
+.btn {
+  width: 148px;
+}

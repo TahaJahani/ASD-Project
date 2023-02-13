@@ -1,1 +1,51 @@
-<p>login-form works!</p>
+<form class="add-form container" (ngSubmit)="onSubmit()">
+  <div class="form-control">
+    <label for="username">Username</label>
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="username"
+      id="username"
+      placeholder="Username"
+      required
+      data-error-invalid="Invalid username"
+      #prmUsername="ngModel"
+      username
+    />
+    <p
+      class="error"
+      *ngIf="prmUsername.invalid && (prmUsername.dirty || prmUsername.touched)"
+    >
+      <span *ngIf="prmUsername.errors?.['required']">
+        Username is required.</span
+      >
+      <span *ngIf="prmUsername.errors?.['username']"> Invalid username.</span>
+    </p>
+  </div>
+  <div class="form-control">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="password"
+      id="password"
+      required
+      data-error-invalid="Invalid password"
+      #prmPassword="ngModel"
+      password
+    />
+    <p
+      class="error"
+      *ngIf="prmPassword.invalid && (prmPassword.dirty || prmPassword.touched)"
+    >
+      <span *ngIf="prmPassword.errors?.['required']">
+        Password is required.</span
+      >
+      <span *ngIf="prmPassword.errors?.['password']"> Invalid password.</span>
+    </p>
+  </div>
+  <div class="flex-row">
+    <input type="submit" value="Login" class="btn" />
+    <a class="btn button-login" routerLink="/register">Register</a>
+  </div>
+</form>
