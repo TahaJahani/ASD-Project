@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {User} from '../../Interfaces/User';
 
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
 })
-export class RegisterFormComponent {
+export class RegisterFormComponent implements OnInit {
+  @Output() register : EventEmitter<User> = new EventEmitter();
+
   email: string = '';
   username: string = '';
+  firstName:  string = '';
+  lastName: string = '';
   password: string = '';
   confirmPassword: string = '';
   emailPattern = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$');
@@ -20,7 +25,7 @@ export class RegisterFormComponent {
       alert('Password and Confirm Password do not match');
       return;
     } 
-    if (this.email === '' || this.username === '' || this.password === '' || this.confirmPassword === '') {
+    if (this.email === '' || this.username === '' || this.password === '' || this.confirmPassword === '' || this.firstName === '' || this.lastName === '') {
       alert('Please fill in all fields');
       return;
     }
@@ -36,10 +41,18 @@ export class RegisterFormComponent {
       alert('Invalid email address');
       return;
     }
-    alert('Success');
-    this.email = '';
-    this.username = '';
-    this.password = '';
-    this.confirmPassword = '';
+
+    const newUser : User = {
+      email: this.email,
+      username: this.username,
+      password: this.password,
+      first_name: this.firstName,
+      last_name: this.lastName,
+    }
+
+    this.register.emit(newUser);
+
+    // this.password = '';
+    // this.confirmPassword = '';
   }
 }

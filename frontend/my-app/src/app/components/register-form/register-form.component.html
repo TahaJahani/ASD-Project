@@ -1,6 +1,64 @@
 <form class="add-form container" (ngSubmit)="onSubmit()">
   <div class="form-control">
-    <label for="email">Email</label>
+    <div class="flex-row">
+      <div>
+        <label for="firstName">First Name<span> *</span></label>
+        <input
+          type="text"
+          name="firstName"
+          [(ngModel)]="firstName"
+          id="firstName"
+          placeholder="John"
+          required
+          data-error-invalid="Invalid first name"
+          #prmFirstName="ngModel"
+          firstName
+        />
+        <p
+          class="error"
+          *ngIf="
+            prmFirstName.invalid && (prmFirstName.dirty || prmFirstName.touched)
+          "
+        >
+          <span *ngIf="prmFirstName.errors?.['required']">
+            First name is required.</span
+          >
+          <span *ngIf="prmFirstName.errors?.['firstName']">
+            Invalid first name.</span
+          >
+        </p>
+      </div>
+      <div>
+        <label for="lastName">Last Name<span> *</span></label>
+        <input
+          type="text"
+          name="lastName"
+          [(ngModel)]="lastName"
+          id="lastName"
+          placeholder="Doe"
+          required
+          data-error-invalid="Invalid last name"
+          #prmLastName="ngModel"
+          lastName
+        />
+        <p
+          class="error"
+          *ngIf="
+            prmLastName.invalid && (prmLastName.dirty || prmLastName.touched)
+          "
+        >
+          <span *ngIf="prmLastName.errors?.['required']">
+            Last name is required.</span
+          >
+          <span *ngIf="prmLastName.errors?.['lastName']">
+            Invalid last name.</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="email">Email<span> *</span></label>
     <input
       type="email"
       name="email"
@@ -22,7 +80,7 @@
     </p>
   </div>
   <div class="form-control">
-    <label for="username">Username</label>
+    <label for="username">Username<span> *</span></label>
     <input
       type="text"
       name="username"
@@ -45,7 +103,7 @@
     </p>
   </div>
   <div class="form-control">
-    <label for="password">Password</label>
+    <label for="password">Password<span> *</span></label>
     <input
       type="password"
       name="password"
@@ -67,7 +125,7 @@
     </p>
   </div>
   <div class="form-control">
-    <label for="confirmPassword">Confirm Password</label>
+    <label for="confirmPassword">Confirm Password<span> *</span></label>
     <input
       type="password"
       name="confirmPassword"
@@ -93,5 +151,5 @@
       >
     </p>
   </div>
-  <input type="submit" value="Log me in" class="btn btn-block" />
+  <input type="submit" value="Sign Up" class="btn btn-block" />
 </form>

@@ -5,3 +5,15 @@ span {
 input.ng-invalid.ng-touched {
   border: red 1px solid;
 }
+
+.flex-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+input[firstname],
+input[lastname] {
+  width: 148px;
+}
