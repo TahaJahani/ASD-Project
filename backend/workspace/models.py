@@ -3,10 +3,11 @@ from django.db import models
 
 
 class Board(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(unique=True, max_length=100)
     color = models.CharField(max_length=50)
     privacy = models.CharField(max_length=20)
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=None, null=True)
+    users = models.ManyToManyField(User)
 
     def to_dict(self):
         return {
@@ -19,3 +20,4 @@ class Board(models.Model):
 class Task(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
