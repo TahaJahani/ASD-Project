@@ -7,7 +7,6 @@ class Board(models.Model):
     color = models.CharField(max_length=50)
     privacy = models.CharField(max_length=20)
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=None, null=True)
-    users = models.ManyToManyField(User)
 
     def to_dict(self):
         return {
@@ -17,7 +16,20 @@ class Board(models.Model):
         }
 
 
-class Task(models.Model):
+class Card(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
+    description = models.CharField(max_length=10000, default=None)
+
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "description": self.description,
+            "status": self.status
+        }
+
+
+class BoardFollowing(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    users = models.ForeignKey(User, on_delete=models.CASCADE)

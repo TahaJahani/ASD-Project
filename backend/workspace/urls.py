@@ -9,9 +9,9 @@ urlpatterns = [
     path('board/read', views.read_board),
     path('join-board', views.join_board),
 
-    path('task/create', views.create_task),
-    path('task/update', views.update_task),
-    path('task/delete', views.delete_task),
-    path('task/read', views.read_task),
+    path('card', views.create_card),
+    path('card/update', views.update_card),
+    path('card/delete', views.delete_card),
+    path('card/read', views.read_card),
 
 ]
