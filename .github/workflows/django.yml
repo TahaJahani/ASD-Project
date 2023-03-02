@@ -18,10 +18,10 @@ jobs:
     steps:
     - name: Install Dependencies
       run: |
-        source ~/env/bin/activate && pip install -r ./backend/pip-requirements.txt
+        source ~/env/bin/activate && pip install -r /home/ubuntu/ASD-Project/backend/pip-requirements.txt
     - name: Run Tests
       run: |
-        cd backend && python manage.py test
+        cd /home/ubuntu/ASD-Project/backend && python manage.py test
     - name: Run Server
       run: |
         sudo systemctl restart backend
