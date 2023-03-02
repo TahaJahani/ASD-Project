@@ -1,0 +1,13 @@
+<!-- design a rectangle with a title of board:Board and random color background -->
+
+<mat-card
+  class="board"
+  [style.--bg-color-red]="board.color_red"
+  [style.--bg-color-green]="board.color_green"
+  [style.--bg-color-blue]="board.color_blue"
+  [style.color]="GetLuminance()"
+>
+  <mat-card-title>
+    {{ board.title }}
+  </mat-card-title>
+</mat-card>

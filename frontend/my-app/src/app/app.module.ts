@@ -3,7 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+//accept mat-grid-list
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -13,6 +16,9 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { BoardListComponent } from './components/board-list/board-list.component';
+import { BoardComponent } from './components/board/board.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,6 +30,8 @@ import { RegisterFormComponent } from './components/register-form/register-form.
     RegisterComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    BoardListComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,8 +42,9 @@ import { RegisterFormComponent } from './components/register-form/register-form.
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent}
     ]),
-
-    // NgbModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatGridListModule,
   ],
   providers: [
   ],

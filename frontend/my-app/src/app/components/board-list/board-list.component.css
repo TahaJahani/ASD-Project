@@ -1,0 +1,6 @@
+app-board {
+  width: 90%;
+  text-align: center;
+  color: calc(0.5 * var());
+  cursor: pointer;
+}

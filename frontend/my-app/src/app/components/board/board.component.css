@@ -1,0 +1,21 @@
+:root {
+  --bg-color-red: 256;
+  --bg-color-green: 256;
+  --bg-color-blue: 256;
+}
+
+.board {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(
+    var(--bg-color-red),
+    var(--bg-color-green),
+    var(--bg-color-blue)
+  );
+
+  border-radius: 10px;
+  padding: 10%;
+  display: inline-block;
+  vertical-align: top;
+}
