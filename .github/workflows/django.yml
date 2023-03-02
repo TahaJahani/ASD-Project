@@ -21,7 +21,7 @@ jobs:
         source ~/env/bin/activate && pip install -r /home/ubuntu/ASD-Project/backend/pip-requirements.txt
     - name: Run Tests
       run: |
-        cd /home/ubuntu/ASD-Project/backend && python3 manage.py test
+        cd /home/ubuntu/ASD-Project/backend && source ~/env/bin/activate && python manage.py test
     - name: Run Server
       run: |
         sudo systemctl restart backend
