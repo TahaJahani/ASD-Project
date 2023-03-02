@@ -16,6 +16,9 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     steps:
+    - name: Activate Virtual Environment
+      run: |
+        source ~/env/bin/activate
     - name: Install Dependencies
       run: |
         pip install -r pip-requirements.txt
