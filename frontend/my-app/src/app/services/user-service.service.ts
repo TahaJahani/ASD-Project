@@ -6,8 +6,8 @@ import { User } from '../Interfaces/User';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*' 
-    // 'Access-Control-Allow-Credentials': 'true'
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true'
   })
 };
 
@@ -21,6 +21,11 @@ export class UserServiceService {
 
   signUp(user : User) : Observable<any> {
     const url = `${this.apiURL}/sign-up`;
+    return this.http.post(url, user, httpOptions); 
+  }
+
+  signIn(user : User) : Observable<any> {
+    const url = `${this.apiURL}/login`;
     return this.http.post(url, user, httpOptions); 
   }
 }

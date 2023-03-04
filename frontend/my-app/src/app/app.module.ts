@@ -40,7 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule.forRoot([
       { path: '', component: HomepageComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent}
+      { path: 'register', component: RegisterComponent},
+      { path: 'boards', component: BoardListComponent}
     ]),
     BrowserAnimationsModule,
     MatCardModule,

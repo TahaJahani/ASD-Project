@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { User } from '../../Interfaces/User';
 
 @Component({
   selector: 'app-login-form',
@@ -6,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  @Output() login : EventEmitter<any> = new EventEmitter();
+  @Output() login : EventEmitter<User> = new EventEmitter();
 
   username: string = '';
   password: string = '';
@@ -22,8 +23,13 @@ export class LoginFormComponent implements OnInit {
       return;
     }
 
-    alert('received username: ' + this.username + ' and password: ' + this.password + '');
-    // this.login.emit({username: this.username, password: this.password});
+    const requestedLoginUser : User = {
+      username: this.username,
+      password: this.password
+    }
+
+    this.login.emit(requestedLoginUser);
+
   }
 
 }
