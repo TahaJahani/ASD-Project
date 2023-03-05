@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'apps.authentication',
-    'workspace',
+    'apps.workspace',
 ]
 
 MIDDLEWARE = [

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.utils import timezone
 
-from workspace.models import Board, Card
+from apps.workspace.models import Board, Card
 
 
 def create_board(request):
