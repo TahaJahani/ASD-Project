@@ -16,16 +16,17 @@ const httpOptions = {
 })
 export class UserServiceService {
   private apiURL = 'http://37.32.13.83/auth';
+  public userLoggedIn !: User;
 
   constructor(private http : HttpClient) { }
 
   signUp(user : User) : Observable<any> {
     const url = `${this.apiURL}/sign-up`;
-    return this.http.post(url, user, httpOptions); 
+    return this.http.post(url, user); 
   }
 
   signIn(user : User) : Observable<any> {
     const url = `${this.apiURL}/login`;
-    return this.http.post(url, user, httpOptions); 
+    return this.http.post(url, user);
   }
 }

@@ -9,7 +9,7 @@ import { User } from '../../Interfaces/User';
 export class LoginFormComponent implements OnInit {
   @Output() login : EventEmitter<User> = new EventEmitter();
 
-  username: string = '';
+  email: string = '';
   password: string = '';
 
   constructor() { }
@@ -18,13 +18,13 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.username === '' || this.password === '') {
+    if (this.email === '' || this.password === '') {
       alert('Please fill in all fields');
       return;
     }
 
     const requestedLoginUser : User = {
-      username: this.username,
+      email: this.email,
       password: this.password
     }
 

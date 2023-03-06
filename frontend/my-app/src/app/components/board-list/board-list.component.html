@@ -1,5 +1,42 @@
-<!-- list of <app-board>s with four boards in a row -->
-<mat-grid-list cols="4" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let board of boards">
-    <app-board [board]="board"></app-board> </mat-grid-tile
-></mat-grid-list>
+<mat-drawer-container class="my-container">
+  <mat-drawer #drawer class="board-drawer" mode="push" position="start">
+    <h2 class="header-drawer">Boards</h2>
+    <mat-icon class="library-add">library_add</mat-icon>
+    <mat-nav-list>
+      <mat-list-item
+        (click)="changeBgColor(i)"
+        *ngFor="let board of boards; let i = index"
+        [style.background-color]="bgColor[i]"
+        [style.color]="bgColor[i] === 'royalblue' ? 'white' : 'black'"
+      >
+        <div class="app-board">
+          <a
+            [style.color]="bgColor[i] === 'royalblue' ? 'white' : 'black'"
+            matLine
+            [routerLink]="['/boards', board.id]"
+          >
+            <h2>
+              {{ board.title }}
+            </h2>
+            <p class="board-description">
+              {{ board.description }}
+            </p>
+          </a>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button type="button" mat-button (click)="drawer.toggle()">
+      <div>
+        <!-- <mat-icon>list</mat-icon> -->
+
+        <!-- <mat-icon>developer_board</mat-icon> rotated 180degree -->
+
+        <mat-icon class="mirror">developer_board</mat-icon>
+      </div>
+      <h1>Boards</h1>
+    </button>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
