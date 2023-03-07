@@ -11,7 +11,7 @@ urlpatterns = [
     path('board/invite', InviteToBoard.as_view()),
 
     path('card/create', CreateCard.as_view()),
-    # path('card/update', views.update_card),
+    path('card/update', UpdateCard.as_view()),
     # path('card/delete', views.delete_card),
     # path('card/read', views.read_card),
 

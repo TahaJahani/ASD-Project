@@ -24,3 +24,22 @@ class CreateCard(APIView):
             title=card_title
         )
         return Response(CardSerializer(card).data)
+
+
+class UpdateCard(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def psot(self, request):
+        description = request.POST.get('description', None)
+        title = request.POST.get('title', None)
+        status = request.POST.get('status', None)
+        card_id = request.POST.get('card_id')
+
+        card = Card.objects.filter(pk=card_id, list__board__users__in=[request.user])
+        card = get_object_or_404(card)
+
+        for item in [description, title, status]:
+            if item is not None:
+                setattr(card, item, item)
+        card.save()
+        return Response({'Message': 'card updated'})
