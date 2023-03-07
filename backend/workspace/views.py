@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.utils import timezone
 
 from workspace.models import Board, Card
 
@@ -10,17 +9,15 @@ def create_board(request):
     #    return JsonResponse("Not authenticated")
 
     board_title = request.GET['title']
-    board_color = request.GET['color']
-    privacy = request.GET['privacy']
-    create_time = timezone.now()
+    board_bg = request.GET['background']
+    visibility = request.GET['visibility']
     if Board.objects.filter(title=board_title).exists():
         return JsonResponse({
             "Status": "Fail",
             "Message": 'A board with this title already exists',
-            # "create_time": create_time
         }, safe=False, status=400)
 
-    board = Board(title=board_title, color=board_color, privacy=privacy)
+    board = Board(title=board_title, background=board_bg, visibility=visibility)
     board.save()
     return JsonResponse({
         "Status": "Ok",
@@ -32,12 +29,11 @@ def create_board(request):
 def update_board(request):
     previous_board_title = request.GET('title')
     new_board_title = request.GET('new_title')
-    new_board_color = request.GET('new_color')
+    new_board_background = request.GET('new_background')
     board = Board.objects.filter(title=previous_board_title).first()
     board.title = new_board_title
-    if not new_board_color.equal(None):
-        board.color = new_board_color
-
+    if not new_board_background.equal(None):
+        board.background = new_board_background
     board.save()
 
     return JsonResponse({'Message': ' ok'}, status=200)
@@ -89,10 +85,16 @@ def create_card(request):
 
 
 def update_card(request):
+    card_title = request.GET['card_title']
+    card = Card.objects.filter(title=card_title)
     description = request.GET['description']
-    card = request.GET['card_title']
+    due_date = request.GET['due_date']
+
     if not description.equal(None):
         card.description = description
+    if not due_date.equal(None):
+        card.due_date = due_date
+
     card.save()
     return JsonResponse({'Message': 'card updated'}, status=200)
 
