@@ -5,20 +5,6 @@ from django.utils import timezone
 from apps.workspace.models import Board, Card
 
 
-def update_board(request):
-    previous_board_title = request.GET('title')
-    new_board_title = request.GET('new_title')
-    new_board_color = request.GET('new_color')
-    board = Board.objects.filter(title=previous_board_title).first()
-    board.title = new_board_title
-    if not new_board_color.equal(None):
-        board.color = new_board_color
-
-    board.save()
-
-    return JsonResponse({'Message': ' ok'}, status=200)
-
-
 def delete_board(request):
     title = request.GET['title']
     board = Board.objects.filter(title=title)

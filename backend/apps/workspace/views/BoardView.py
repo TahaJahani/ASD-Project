@@ -26,3 +26,20 @@ class CreateBoard(APIView):
             "Message": "Board created",
             "Board": board.to_dict()
         })
+
+
+class UpdateBoard(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def post(self, request):
+        previous_board_title = request.POST.get('title', None)
+        new_board_title = request.POST.get('new_title', None)
+        new_board_color = request.POST.get('new_color', None)
+        board = Board.objects.filter(title=previous_board_title, owner=request.user).first()
+        if new_board_title is not None:
+            board.title = new_board_title
+        if new_board_color is not None:
+            board.color = new_board_color
+        board.save()
+
+        return Response({'Message': ' ok'}, status=200)
