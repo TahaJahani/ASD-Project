@@ -80,7 +80,8 @@ class JoinBoard(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, token):
-        join_request = get_object_or_404(JoinRequest, token=token)
+        join_request = JoinRequest.objects.filter(token=token, user=request.user)
+        join_request = get_object_or_404(join_request)
         board = join_request.board
         board.users.add(request.user)
         return Response({'Message': 'joined to board'})
@@ -93,11 +94,13 @@ class InviteToBoard(APIView):
     def post(self, request, pk):
         user_id = request.data.get("user_id")
         board = Board.objects.filter(pk=pk, owner=request.user)
-        if not board.exists():
-            return Response({"message": "Board does not exist"}, status=404)
-        user = User.objects.get(pk=user_id)
+        board = get_object_or_404(board)
+        user = get_object_or_404(User, pk=user_id)
+        if user.boards.filter(pk=pk).exists():
+            return Response({"message": "user already assigned to board"}, status=400)
         join_request = JoinRequest.objects.create(
             board=board,
-            user=user
+            user=user,
+            token=JoinRequest.get_unique_token()
         )
         return Response({"token": join_request.token})

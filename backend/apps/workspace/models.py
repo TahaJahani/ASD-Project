@@ -36,18 +36,12 @@ class JoinRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     token = models.CharField(max_length=50, unique=True)
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        if self.id:
-            super(JoinRequest, self).save(force_insert, force_update, using, update_fields)
+    @staticmethod
+    def get_unique_token():
+        for i in range(10):
+            token = uuid.uuid1()
+            if not JoinRequest.objects.filter(token=token).exists():
+                return token
+                break
         else:
-            for i in range(10):
-                try:
-                    self.token = uuid.uuid1()
-                    if update_fields is None:
-                        update_fields = []
-                    super(JoinRequest, self).save(force_insert, force_update, using, update_fields + ["token"])
-                except:
-                    pass
             raise Exception("Cannot Save Model!")
