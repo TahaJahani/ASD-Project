@@ -38,6 +38,7 @@ class CreateBoard(APIView):
             color=board_color,
             owner=request.user
         )
+        board.users.add(request.user)
         return Response({
             "Status": "Ok",
             "Message": "Board created",
