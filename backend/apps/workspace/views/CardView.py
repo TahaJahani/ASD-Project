@@ -1,4 +1,5 @@
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
@@ -10,6 +11,7 @@ from apps.workspace.serializers.CardSerializer import CardSerializer
 
 class ListCards(ListAPIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = CardSerializer
 
     def get_queryset(self):
@@ -21,6 +23,7 @@ class ListCards(ListAPIView):
 
 class CreateCard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         list_id = request.data.get('list_id')
@@ -38,6 +41,7 @@ class CreateCard(APIView):
 
 class UpdateCard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def psot(self, request):
         description = request.data.get('description', None)
@@ -57,6 +61,7 @@ class UpdateCard(APIView):
 
 class DeleteCard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def delete(self, request):
         card_id = request.data.get('card_id')

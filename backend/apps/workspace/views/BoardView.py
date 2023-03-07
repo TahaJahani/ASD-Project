@@ -1,4 +1,5 @@
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
@@ -9,6 +10,7 @@ from django.shortcuts import get_object_or_404
 
 class GetBoards(ListAPIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = BoardSerializer
 
     def get_queryset(self):
@@ -19,6 +21,7 @@ class GetBoards(ListAPIView):
 
 class CreateBoard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         user = request.user
@@ -44,6 +47,7 @@ class CreateBoard(APIView):
 
 class UpdateBoard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         previous_board_title = request.data.get('title', None)
@@ -61,6 +65,7 @@ class UpdateBoard(APIView):
 
 class DeleteBoard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def delete(self, request):
         title = request.DATA.get('title')
@@ -73,6 +78,7 @@ class DeleteBoard(APIView):
 
 class JoinBoard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, token):
         join_request = get_object_or_404(JoinRequest, token=token)
@@ -83,6 +89,7 @@ class JoinBoard(APIView):
 
 class InviteToBoard(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         board_title = request.data.get("title")

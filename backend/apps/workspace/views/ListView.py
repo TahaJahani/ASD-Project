@@ -1,4 +1,5 @@
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
@@ -10,6 +11,7 @@ from django.shortcuts import get_object_or_404
 
 class ListLists(ListAPIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = ListDetailSerializer
 
     def get_queryset(self):
@@ -21,6 +23,7 @@ class ListLists(ListAPIView):
 
 class CreateList(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         board_id = request.data.get('board_id')
@@ -37,6 +40,7 @@ class CreateList(APIView):
 
 class UpdateList(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         list_id = request.data.get('list_id')
@@ -51,6 +55,7 @@ class UpdateList(APIView):
 
 class DeleteList(APIView):
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
         List.objects.filter(pk=pk, board__users__in=[request.user]).delete()
