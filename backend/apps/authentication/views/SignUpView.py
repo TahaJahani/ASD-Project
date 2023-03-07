@@ -13,9 +13,10 @@ class SignUpView(APIView):
             return Response(data=signup_form.errors)
         user = User.objects.create_user(
             request.data["username"],
-            request.data["email"],
-            request.data["password"]
+            password=request.data["password"]
         )
+        if "email" in request.data:
+            user.email = request.data["email"]
         if "first_name" in request.data:
             user.first_name = request.data["first_name"]
         if "last_name" in request.data:
