@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.workspace.models import List
-from apps.workspace.serializers import CardSerializer
+from . import CardSerializer
 
 
 class ListSerializer(serializers.ModelSerializer):
