@@ -13,6 +13,7 @@ urlpatterns = [
     path('list/list', ListLists.as_view()),
     path('list/create', CreateList.as_view()),
     path('list/update', UpdateList.as_view()),
+    path('list/delete/<pk>', DeleteList.as_view()),
 
     path('card/create', CreateCard.as_view()),
     path('card/update', UpdateCard.as_view()),

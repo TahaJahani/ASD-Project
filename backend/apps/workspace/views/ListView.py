@@ -46,3 +46,11 @@ class UpdateList(APIView):
         )
 
         return Response({"message": "List updated"})
+
+
+class DeleteList(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        List.objects.filter(pk=pk, board__users__in=[request.user]).delete()
+        return Response({"message": "List deleted"})
