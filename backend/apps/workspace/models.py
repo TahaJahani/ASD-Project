@@ -16,9 +16,16 @@ class Board(models.Model):
         }
 
 
-class Card(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+class List(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
+    order = models.IntegerField()
+
+
+class Card(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.PROTECT)
+    title = models.CharField(max_length=100)
+    order = models.IntegerField()
     status = models.CharField(max_length=100)
     description = models.CharField(max_length=10000, default=None)
 

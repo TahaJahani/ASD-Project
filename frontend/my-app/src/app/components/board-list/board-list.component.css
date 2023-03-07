@@ -1,6 +1,78 @@
-app-board {
-  width: 90%;
-  text-align: center;
-  color: calc(0.5 * var());
+.app-board {
+  height: max-content;
+}
+
+mat-drawer-container {
+  height: 100%;
+  width: 100%;
+  background-color: aliceblue;
+}
+
+h2.header-drawer {
+  display: inline;
+  color: black;
+  padding: 1rem 0 0 0.2rem;
+}
+
+.library-add {
+  float: right;
+  padding: 0rem 2rem 0.25rem 0;
+  height: max-content;
   cursor: pointer;
+}
+
+mat-list-item {
+  height: max-content !important;
+  padding: 0.5rem 0.5rem;
+  box-shadow: 1px 2px 5px 0 #121212;
+}
+
+.board-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+mat-drawer,
+mat-drawer-inner-container {
+  width: 33%;
+  background-color: aliceblue !important;
+}
+
+h2 {
+  margin-bottom: 1px;
+}
+
+[mat-button] {
+  box-sizing: border-box;
+  background-color: transparent;
+  background-color: #92ccff;
+  padding: 0.5rem 1.25rem;
+  margin: 1rem 0 0.5rem 0.5rem;
+  width: calc(100% - 0.5rem);
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #2487bb;
+  border-right: none;
+  border-top-left-radius: 10rem;
+  border-bottom-left-radius: 10rem;
+}
+
+div {
+  height: 35px;
+}
+
+mat-icon {
+  color: #121212;
+  font-weight: 500;
+  font-size: xx-large;
+  display: inline !important;
+}
+
+h1 {
+  display: inline;
+  height: 35px;
+  margin: 0;
 }
