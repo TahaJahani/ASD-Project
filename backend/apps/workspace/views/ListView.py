@@ -32,3 +32,17 @@ class CreateList(APIView):
             order=list_order
         )
         return Response(ListSerializer(list_obj))
+
+
+class UpdateList(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def post(self, request):
+        list_id = request.POST.get('list_id')
+        title = request.POST.get('title')
+
+        List.objects.filter(pk=list_id, board__users__in=[request.user]).update(
+            title=title
+        )
+
+        return Response({"message": "List updated"})
