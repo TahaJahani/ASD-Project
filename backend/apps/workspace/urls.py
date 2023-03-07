@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('card/create', CreateCard.as_view()),
     path('card/update', UpdateCard.as_view()),
-    # path('card/delete', views.delete_card),
+    path('card/delete', DeleteCard.as_view()),
     # path('card/read', views.read_card),
 
 ]

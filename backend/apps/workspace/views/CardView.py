@@ -43,3 +43,12 @@ class UpdateCard(APIView):
                 setattr(card, item, item)
         card.save()
         return Response({'Message': 'card updated'})
+
+
+class DeleteCard(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        card_id = request.POST.get('card_id')
+        Card.objects.filter(pk=card_id, list__board__users__in=[request.user]).delete()
+        return Response({'Message': 'card deleted'})
