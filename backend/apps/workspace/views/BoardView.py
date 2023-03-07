@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 
 class GetBoards(ListAPIView):
     authentication_classes = [IsAuthenticated]
+    serializer_class = BoardSerializer
 
     def get_queryset(self):
         user = self.request.user

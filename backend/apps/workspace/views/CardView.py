@@ -3,10 +3,20 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from apps.workspace.models import *
-from apps.workspace.serializers.BoardSerializer import BoardSerializer
 from django.shortcuts import get_object_or_404
 
 from apps.workspace.serializers.CardSerializer import CardSerializer
+
+
+class ListCards(ListAPIView):
+    authentication_classes = [IsAuthenticated]
+    serializer_class = CardSerializer
+
+    def get_queryset(self):
+        list_id = self.request.GET.get('list_id')
+        user = self.request.user
+        cards = Card.objects.filter(list_id=list_id, list__board__users__in=[user]).all()
+        return cards
 
 
 class CreateCard(APIView):
