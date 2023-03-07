@@ -5,30 +5,6 @@ from django.utils import timezone
 from apps.workspace.models import Board, Card
 
 
-def create_board(request):
-    # if not request.user.is_authenticated:
-    #    return JsonResponse("Not authenticated")
-
-    board_title = request.GET['title']
-    board_color = request.GET['color']
-    privacy = request.GET['privacy']
-    create_time = timezone.now()
-    if Board.objects.filter(title=board_title).exists():
-        return JsonResponse({
-            "Status": "Fail",
-            "Message": 'A board with this title already exists',
-            # "create_time": create_time
-        }, safe=False, status=400)
-
-    board = Board(title=board_title, color=board_color, privacy=privacy)
-    board.save()
-    return JsonResponse({
-        "Status": "Ok",
-        "Message": "Board created",
-        "Board": board.to_dict()
-    }, safe=False, status=200)
-
-
 def update_board(request):
     previous_board_title = request.GET('title')
     new_board_title = request.GET('new_title')
