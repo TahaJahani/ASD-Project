@@ -50,11 +50,10 @@ class UpdateBoard(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        previous_board_title = request.data.get('title', None)
+    def post(self, request, pk):
         new_board_title = request.data.get('new_title', None)
         new_board_color = request.data.get('new_color', None)
-        board = Board.objects.filter(title=previous_board_title, owner=request.user).first()
+        board = Board.objects.filter(pk=pk, owner=request.user).first()
         if new_board_title is not None:
             board.title = new_board_title
         if new_board_color is not None:
@@ -68,9 +67,8 @@ class DeleteBoard(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request):
-        title = request.DATA.get('title')
-        board = Board.objects.filter(title=title, owner=request.user)
+    def delete(self, request, pk):
+        board = Board.objects.filter(pk=pk, owner=request.user)
         if not board.exists():
             return Response({'Message': 'there is no board with this title'}, status=404)
         board.delete()
