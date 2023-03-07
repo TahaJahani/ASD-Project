@@ -7,7 +7,8 @@ urlpatterns = [
     path('board/update', UpdateBoard.as_view()),
     path('board/delete', DeleteBoard.as_view()),
     path('board/list', GetBoards.as_view()),
-    # path('join-board', views.join_board),
+    path('board/join', JoinBoard.as_view()),
+    path('board/invite', InviteToBoard.as_view()),
     #
     # path('card', views.create_card),
     # path('card/update', views.update_card),

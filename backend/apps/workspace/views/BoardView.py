@@ -4,6 +4,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from apps.workspace.models import *
 from apps.workspace.serializers.BoardSerializer import BoardSerializer
+from django.shortcuts import get_object_or_404
 
 
 class GetBoards(ListAPIView):
@@ -65,3 +66,30 @@ class DeleteBoard(APIView):
             return Response({'Message': 'there is no board with this title'}, status=404)
         board.delete()
         return Response({'Message': 'board deleted'})
+
+
+class JoinBoard(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def post(self, request, token):
+        join_request = get_object_or_404(JoinRequest, token=token)
+        board = join_request.board
+        board.users.add(request.user)
+        return Response({'Message': 'joined to board'})
+
+
+class InviteToBoard(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def post(self, request):
+        board_title = request.POST.get("title")
+        user_id = request.POST.get("user_id")
+        board = Board.objects.filter(title=board_title, owner=request.user)
+        if not board.exists():
+            return Response({"message": "Board does not exist"}, status=404)
+        user = User.objects.get(pk=user_id)
+        join_request = JoinRequest.objects.create(
+            board=board,
+            user=user
+        )
+        return Response({"token": join_request.token})
