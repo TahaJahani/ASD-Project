@@ -80,10 +80,12 @@ class JoinBoard(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, token):
-        join_request = JoinRequest.objects.filter(token=token, user=request.user)
+        join_request = JoinRequest.objects.filter(token=token, user=request.user, is_used=False)
         join_request = get_object_or_404(join_request)
         board = join_request.board
         board.users.add(request.user)
+        join_request.is_used = True
+        join_request.save()
         return Response({'Message': 'joined to board'})
 
 

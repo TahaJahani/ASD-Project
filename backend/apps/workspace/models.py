@@ -35,6 +35,7 @@ class JoinRequest(models.Model):
     board = models.ForeignKey(Board, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     token = models.CharField(max_length=50, unique=True)
+    is_used = models.BooleanField(default=False)
 
     @staticmethod
     def get_unique_token():
