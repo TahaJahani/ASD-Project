@@ -10,6 +10,8 @@ urlpatterns = [
     path('board/join', JoinBoard.as_view()),
     path('board/invite', InviteToBoard.as_view()),
 
+    path('list/list', ListLists.as_view()),
+
     path('card/create', CreateCard.as_view()),
     path('card/update', UpdateCard.as_view()),
     path('card/delete', DeleteCard.as_view()),
