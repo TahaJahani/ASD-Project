@@ -1,5 +1,6 @@
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -31,7 +32,7 @@ class LoginView(APIView):
 
 
 class LogoutView(APIView):
-    authentication_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
     def post(self, request):
         user = request.user
