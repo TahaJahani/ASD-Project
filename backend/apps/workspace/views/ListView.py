@@ -16,3 +16,19 @@ class ListLists(ListAPIView):
         user = self.request.user
         lists = List.objects.filter(board_id=board_id, board__users__in=[user]).all()
         return Response(ListSerializer(lists, many=True))
+
+
+class CreateList(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def post(self, request):
+        board_id = request.POST.get('board_id')
+        title = request.POST.get('title')
+        board = get_object_or_404(Board, pk=board_id)
+        list_order = List.objects.filter(board=board).count()
+        list_obj = List.create(
+            board=board,
+            title=title,
+            order=list_order
+        )
+        return Response(ListSerializer(list_obj))
