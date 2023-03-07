@@ -41,7 +41,7 @@ class CreateBoard(APIView):
         return Response({
             "Status": "Ok",
             "Message": "Board created",
-            "Board": board.to_dict()
+            "Board": BoardSerializer(board).data
         })
 
 
