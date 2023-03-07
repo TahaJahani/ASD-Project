@@ -14,7 +14,7 @@ class GetBoards(ListAPIView):
     def get_queryset(self):
         user = self.request.user
         boards = user.boards.all()
-        return Response(BoardSerializer(boards, many=True).data)
+        return boards
 
 
 class CreateBoard(APIView):
@@ -22,17 +22,19 @@ class CreateBoard(APIView):
 
     def post(self, request):
         user = request.user
-        board_title = request.POST.get('title')
-        board_color = request.POST('color')
-        privacy = request.POST.get('privacy')
+        board_title = request.data.get('title')
+        board_color = request.data.get('color')
         if Board.objects.filter(title=board_title, owner=user).exists():
             return Response({
                 "Status": "Fail",
                 "Message": 'A board with this title already exists',
             }, status=400)
 
-        board = Board(title=board_title, color=board_color, privacy=privacy)
-        board.save()
+        board = Board.objects.create(
+            title=board_title,
+            color=board_color,
+            owner=request.user
+        )
         return Response({
             "Status": "Ok",
             "Message": "Board created",
@@ -44,9 +46,9 @@ class UpdateBoard(APIView):
     authentication_classes = [TokenAuthentication]
 
     def post(self, request):
-        previous_board_title = request.POST.get('title', None)
-        new_board_title = request.POST.get('new_title', None)
-        new_board_color = request.POST.get('new_color', None)
+        previous_board_title = request.data.get('title', None)
+        new_board_title = request.data.get('new_title', None)
+        new_board_color = request.data.get('new_color', None)
         board = Board.objects.filter(title=previous_board_title, owner=request.user).first()
         if new_board_title is not None:
             board.title = new_board_title
@@ -83,8 +85,8 @@ class InviteToBoard(APIView):
     authentication_classes = [TokenAuthentication]
 
     def post(self, request):
-        board_title = request.POST.get("title")
-        user_id = request.POST.get("user_id")
+        board_title = request.data.get("title")
+        user_id = request.data.get("user_id")
         board = Board.objects.filter(title=board_title, owner=request.user)
         if not board.exists():
             return Response({"message": "Board does not exist"}, status=404)

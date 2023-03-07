@@ -23,8 +23,8 @@ class CreateList(APIView):
     authentication_classes = [TokenAuthentication]
 
     def post(self, request):
-        board_id = request.POST.get('board_id')
-        title = request.POST.get('title')
+        board_id = request.data.get('board_id')
+        title = request.data.get('title')
         board = get_object_or_404(Board, pk=board_id)
         list_order = List.objects.filter(board=board).count()
         list_obj = List.create(
@@ -39,8 +39,8 @@ class UpdateList(APIView):
     authentication_classes = [TokenAuthentication]
 
     def post(self, request):
-        list_id = request.POST.get('list_id')
-        title = request.POST.get('title')
+        list_id = request.data.get('list_id')
+        title = request.data.get('title')
 
         List.objects.filter(pk=list_id, board__users__in=[request.user]).update(
             title=title
