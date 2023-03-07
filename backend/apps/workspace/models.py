@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+import uuid
 
 
 class Board(models.Model):
@@ -36,3 +37,25 @@ class Card(models.Model):
             "description": self.description,
             "status": self.status
         }
+
+
+class JoinRequest(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    token = models.CharField(max_length=50, unique=True)
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        if self.id:
+            super(JoinRequest, self).save(force_insert, force_update, using, update_fields)
+        else:
+            for i in range(10):
+                try:
+                    self.token = uuid.uuid1()
+                    if update_fields is None:
+                        update_fields = []
+                    super(JoinRequest, self).save(force_insert, force_update, using, update_fields + ["token"])
+                except:
+                    pass
+            raise Exception("Cannot Save Model!")
