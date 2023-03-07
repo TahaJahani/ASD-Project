@@ -90,10 +90,9 @@ class InviteToBoard(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        board_title = request.data.get("title")
+    def post(self, request, pk):
         user_id = request.data.get("user_id")
-        board = Board.objects.filter(title=board_title, owner=request.user)
+        board = Board.objects.filter(pk=pk, owner=request.user)
         if not board.exists():
             return Response({"message": "Board does not exist"}, status=404)
         user = User.objects.get(pk=user_id)
