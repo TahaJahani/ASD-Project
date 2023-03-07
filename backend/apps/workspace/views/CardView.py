@@ -6,8 +6,10 @@ from apps.workspace.models import *
 from apps.workspace.serializers.BoardSerializer import BoardSerializer
 from django.shortcuts import get_object_or_404
 
+from apps.workspace.serializers.CardSerializer import CardSerializer
 
-class AddCard(APIView):
+
+class CreateCard(APIView):
     authentication_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -21,8 +23,4 @@ class AddCard(APIView):
             order=card_order,
             title=card_title
         )
-        return Response({
-            "Status": "Ok",
-            "Message": "Task created",
-            "Task": card.to_dict()
-        })
+        return Response(CardSerializer(card).data)

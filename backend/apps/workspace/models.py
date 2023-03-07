@@ -25,7 +25,7 @@ class List(models.Model):
 
 
 class Card(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.PROTECT)
+    list = models.ForeignKey(List, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
     status = models.CharField(max_length=100)
