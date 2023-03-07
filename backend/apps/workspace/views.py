@@ -5,11 +5,6 @@ from django.utils import timezone
 from apps.workspace.models import Board, Card
 
 
-def read_board(request):
-    board = Board.objects.get(title=request.GET['title'])
-    return JsonResponse(board.to_dict())
-
-
 def join_board(request):
     username = request.GET['username']
     try:

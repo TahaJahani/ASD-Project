@@ -1,8 +1,18 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
-from datetime import datetime
 from apps.workspace.models import *
+from apps.workspace.serializers.BoardSerializer import BoardSerializer
+
+
+class GetBoards(ListAPIView):
+    authentication_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        boards = user.boards.all()
+        return Response(BoardSerializer(boards, many=True).data)
 
 
 class CreateBoard(APIView):
