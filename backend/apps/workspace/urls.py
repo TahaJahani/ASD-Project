@@ -5,7 +5,7 @@ from .views import *
 urlpatterns = [
     path('board/create', CreateBoard.as_view()),
     path('board/update', UpdateBoard.as_view()),
-    path('board/delete', views.delete_board),
+    path('board/delete', DeleteBoard.as_view()),
     path('board/read', views.read_board),
     path('join-board', views.join_board),
 

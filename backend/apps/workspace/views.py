@@ -5,16 +5,6 @@ from django.utils import timezone
 from apps.workspace.models import Board, Card
 
 
-def delete_board(request):
-    title = request.GET['title']
-    board = Board.objects.filter(title=title)
-    if not board.exists():
-        return JsonResponse({'Message': 'there is no board with this title'})
-    board.delete()
-    board.save()
-    return JsonResponse({'Message': 'board deleted'})
-
-
 def read_board(request):
     board = Board.objects.get(title=request.GET['title'])
     return JsonResponse(board.to_dict())

@@ -43,3 +43,15 @@ class UpdateBoard(APIView):
         board.save()
 
         return Response({'Message': ' ok'}, status=200)
+
+
+class DeleteBoard(APIView):
+    authentication_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        title = request.DATA.get('title')
+        board = Board.objects.filter(title=title, owner=request.user)
+        if not board.exists():
+            return Response({'Message': 'there is no board with this title'}, status=404)
+        board.delete()
+        return Response({'Message': 'board deleted'})
