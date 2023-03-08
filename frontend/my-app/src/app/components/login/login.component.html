@@ -1,1 +1,6 @@
 <app-login-form (login)="signIn($event)"></app-login-form>
+<app-mat-spinner-overlay
+  *ngIf="loading"
+  [overlay]="true"
+  message="Logging In..."
+></app-mat-spinner-overlay>

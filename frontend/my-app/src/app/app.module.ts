@@ -11,6 +11,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -22,6 +24,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { BoardListComponent } from './components/board-list/board-list.component';
 import { BoardDetailsComponent } from './components/board-details/board-details.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { MatSpinnerOverlayComponent } from './components/mat-spinner-overlay/mat-spinner-overlay.component';
 
 const resolvedBoardTitle: ResolveFn<string> = () =>
   Promise.resolve('Board detail');
@@ -38,6 +42,8 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
     RegisterFormComponent,
     BoardListComponent,
     BoardDetailsComponent,
+    LogoutComponent,
+    MatSpinnerOverlayComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +67,11 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
         component: RegisterComponent,
       },
       {
+        path: 'logout',
+        title: 'tlogout',
+        component: LogoutComponent,
+      },
+      {
         path: 'boards',
         title: 'tre-boards',
         component: BoardListComponent,
@@ -82,6 +93,8 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
     MatSidenavModule,
     MatIconModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

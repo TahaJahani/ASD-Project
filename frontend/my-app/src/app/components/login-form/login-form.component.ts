@@ -4,32 +4,29 @@ import { User } from '../../Interfaces/User';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
-  @Output() login : EventEmitter<User> = new EventEmitter();
+  @Output() login: EventEmitter<User> = new EventEmitter();
 
-  email: string = '';
+  username: string = '';
   password: string = '';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
-    if (this.email === '' || this.password === '') {
+    if (this.username === '' || this.password === '') {
       alert('Please fill in all fields');
       return;
     }
 
-    const requestedLoginUser : User = {
-      email: this.email,
-      password: this.password
-    }
+    const requestedLoginUser: User = {
+      username: this.username,
+      password: this.password,
+    };
 
     this.login.emit(requestedLoginUser);
-
   }
-
 }

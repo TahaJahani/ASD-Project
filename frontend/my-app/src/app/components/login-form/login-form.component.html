@@ -1,24 +1,25 @@
 <form class="add-form container" (ngSubmit)="onSubmit()">
   <div class="form-control">
-    <label for="email">Email</label>
+    <label for="username">Username<span> *</span></label>
     <input
-      type="email"
-      name="email"
-      [(ngModel)]="email"
-      id="email"
-      placeholder="john@email.com"
+      type="text"
+      name="username"
+      [(ngModel)]="username"
+      id="username"
+      placeholder="JohnDoe"
+      username
       required
-      data-error-invalid="Invalid email address"
-      #prmEmail="ngModel"
-      email
+      data-error-invalid="Invalid username"
+      #prmUsername="ngModel"
     />
-    <br />
     <p
       class="error"
-      *ngIf="prmEmail.invalid && (prmEmail.dirty || prmEmail.touched)"
+      *ngIf="prmUsername.invalid && (prmUsername.dirty || prmUsername.touched)"
     >
-      <span *ngIf="prmEmail.errors?.['required']"> Email is required.</span>
-      <span *ngIf="prmEmail.errors?.['email']"> Invalid email address.</span>
+      <span *ngIf="prmUsername.errors?.['required']">
+        Username is required.</span
+      >
+      <span *ngIf="prmUsername.errors?.['username']"> Invalid username.</span>
     </p>
   </div>
   <div class="form-control">
