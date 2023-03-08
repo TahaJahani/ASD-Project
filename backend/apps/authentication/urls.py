@@ -8,6 +8,7 @@ urlpatterns = [
     path('login', LoginView.as_view()),
     path('sign-up', SignUpView.as_view()),
     path('logout', LogoutView.as_view()),
-    path('get-me', GetMeView.as_view())
+    path('get-me', GetMeView.as_view()),
+    path('edit', EditProfileView.as_view())
 ]
 

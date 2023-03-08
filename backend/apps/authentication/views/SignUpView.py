@@ -1,3 +1,5 @@
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from ..forms import SignUpForm
@@ -25,3 +27,23 @@ class SignUpView(APIView):
         return Response(data={
             "message": "Saved Successfully",
         })
+
+
+class EditProfileView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        first_name = request.data.get('first_name', user.first_name)
+        last_name = request.data.get('last_name', user.last_name)
+        email = request.data.get('email', user.email)
+        password = request.data.get('password')
+
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        if password is not None:
+            user.set_password(password)
+        user.save()
+        return Response({"message": "Data updated"})
