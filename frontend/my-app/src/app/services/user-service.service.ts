@@ -4,29 +4,32 @@ import { Observable } from 'rxjs';
 import { User } from '../Interfaces/User';
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true'
-  })
+  headers: new HttpHeaders({}),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserServiceService {
   private apiURL = 'http://37.32.13.83/auth';
-  public userLoggedIn !: User;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  signUp(user : User) : Observable<any> {
+  signUp(user: User): Observable<any> {
     const url = `${this.apiURL}/sign-up`;
-    return this.http.post(url, user); 
+    return this.http.post(url, user);
   }
 
-  signIn(user : User) : Observable<any> {
+  signIn(user: User): Observable<any> {
     const url = `${this.apiURL}/login`;
     return this.http.post(url, user);
+  }
+
+  logout(): Observable<any> {
+    const url = `${this.apiURL}/logout`;
+    let token = `token ${localStorage.getItem('token')}`;
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post(url, {}, httpOptions);
   }
 }

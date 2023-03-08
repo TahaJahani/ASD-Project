@@ -1,4 +1,5 @@
 import { Card } from './Card';
+import { List } from './List';
 import { User } from './User';
 export interface Board {
   id?: number;
@@ -6,7 +7,7 @@ export interface Board {
   description: string;
   owner: User;
   members?: User[];
-  cards?: Card[];
+  lists?: List[];
 }
 
 export const dummyData: Board[] = [
@@ -37,34 +38,53 @@ export const dummyData: Board[] = [
         last_name: 'user2lastname',
       },
     ],
-    cards: [
+    lists: [
       {
         id: 1,
-        name: 'Card 1',
-        description: 'This is the first card',
-        assigned: {
-          id: 1,
-          username: 'user1',
-          email: '',
-          first_name: 'user1firstname',
-          last_name: 'user1lastname',
-        },
+        name: 'ToDo',
+        description: 'Things to do',
         board: 1,
-        due_date: new Date(),
+        cards: [
+          {
+            id: 1,
+            name: 'Card 1',
+            description: 'This is the first card',
+            assigned: 1,
+            list: 1,
+            due_date: new Date(),
+          },
+          {
+            id: 2,
+            name: 'Card 2',
+            description: 'This is the second card',
+            assigned: 2,
+            list: 1,
+            due_date: new Date(),
+          },
+        ],
       },
       {
         id: 2,
-        name: 'Card 2',
-        description: 'This is the second card',
-        assigned: {
-          id: 2,
-          username: 'user2',
-          email: '',
-          first_name: 'user2firstname',
-          last_name: 'user2lastname',
-        },
+        name: 'Doing',
+        description: 'Things doing',
         board: 1,
-        due_date: new Date(),
+        cards: [
+          {
+            id: 4,
+            name: 'Card 4',
+            description: 'This is the fourth card',
+            assigned: 1,
+            list: 2,
+            due_date: new Date(),
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: 'Done',
+        description: 'Things done',
+        board: 1,
+        cards: [],
       },
     ],
   },
@@ -96,20 +116,36 @@ export const dummyData: Board[] = [
         last_name: 'user3lastname',
       },
     ],
-    cards: [
+    lists: [
       {
-        id: 3,
-        name: 'Card 3',
-        description: 'This is the third card',
-        assigned: {
-          id: 3,
-          username: 'user3',
-          email: '',
-          first_name: 'user3firstname',
-          last_name: 'user3lastname',
-        },
+        id: 4,
+        name: 'ToDo',
+        description: 'Things to do',
         board: 2,
-        due_date: new Date(),
+        cards: [],
+      },
+      {
+        id: 5,
+        name: 'Doing',
+        description: 'Things doing',
+        board: 2,
+        cards: [],
+      },
+      {
+        id: 6,
+        name: 'Done',
+        description: 'Things done',
+        board: 2,
+        cards: [
+          {
+            id: 3,
+            name: 'Card 3',
+            description: 'This is the third card',
+            assigned: 1,
+            list: 6,
+            due_date: new Date(),
+          },
+        ],
       },
     ],
   },

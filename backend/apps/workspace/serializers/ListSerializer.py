@@ -11,7 +11,7 @@ class ListSerializer(serializers.ModelSerializer):
 
 
 class ListDetailSerializer(serializers.ModelSerializer):
-    cards = CardSerializer(source='card_set')
+    cards = CardSerializer(source='card_set', many=True)
 
     class Meta:
         model = List

@@ -46,16 +46,16 @@ class UpdateCard(APIView):
     def post(self, request):
         description = request.data.get('description', None)
         title = request.data.get('title', None)
-        status = request.data.get('status', None)
         card_id = request.data.get('card_id')
         due_date = request.data.get('due_date')
 
         card = Card.objects.filter(pk=card_id, list__board__users__in=[request.user])
         card = get_object_or_404(card)
 
-        for item in [description, title, status, due_date]:
-            if item is not None:
-                setattr(card, item, item)
+        if title is not None:
+            card.title = title
+        if description is not None:
+            card.description = description
         card.save()
         return Response({'Message': 'card updated'})
 
@@ -64,7 +64,6 @@ class DeleteCard(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request):
-        card_id = request.data.get('card_id')
-        Card.objects.filter(pk=card_id, list__board__users__in=[request.user]).delete()
+    def delete(self, request, pk):
+        Card.objects.filter(pk=pk, list__board__users__in=[request.user]).delete()
         return Response({'Message': 'card deleted'})

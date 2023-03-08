@@ -35,7 +35,7 @@ class CreateList(APIView):
             title=title,
             order=list_order
         )
-        return Response(ListSerializer(list_obj))
+        return Response(ListSerializer(list_obj).data)
 
 
 class UpdateList(APIView):

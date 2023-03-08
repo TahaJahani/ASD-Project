@@ -4,9 +4,16 @@
       <app-navbar-item text="Homepage" link=""></app-navbar-item>
       <app-navbar-item text="Boards" link="/boards"></app-navbar-item>
       <app-navbar-item
+        *ngIf="!isLoggedIn"
         class="float-end"
         text="Login/Register"
         link="/login"
+      ></app-navbar-item>
+      <app-navbar-item
+        *ngIf="isLoggedIn"
+        class="float-end"
+        text="Logout"
+        link="/logout"
       ></app-navbar-item>
     </li>
   </ul>

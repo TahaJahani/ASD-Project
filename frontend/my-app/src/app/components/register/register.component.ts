@@ -6,18 +6,20 @@ import { User } from '../../Interfaces/User';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  
-  constructor (
-    private userService : UserServiceService,
-    private router : Router
-    ) { }
+  loading: boolean = false;
+
+  constructor(
+    private userService: UserServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
-  signUp(user : User) {
+  signUp(user: User) {
+    this.loading = true;
     this.userService.signUp(user).subscribe(
       (res) => {
         console.log(res);
@@ -30,5 +32,4 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-
 }

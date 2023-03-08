@@ -22,16 +22,8 @@ class Card(models.Model):
     list = models.ForeignKey(List, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
-    status = models.CharField(max_length=100)
     description = models.CharField(max_length=10000, default=None)
     due_date = models.DateTimeField(default=datetime.now() + timedelta(days=1))
-
-    def to_dict(self):
-        return {
-            "title": self.title,
-            "description": self.description,
-            "status": self.status
-        }
 
 
 class JoinRequest(models.Model):
