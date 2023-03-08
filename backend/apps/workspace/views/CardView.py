@@ -1,11 +1,11 @@
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
-from rest_framework.response import Response
-from apps.workspace.models import *
 from django.shortcuts import get_object_or_404
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from apps.workspace.models import *
 from apps.workspace.serializers.CardSerializer import CardSerializer
 
 
@@ -48,11 +48,12 @@ class UpdateCard(APIView):
         title = request.data.get('title', None)
         status = request.data.get('status', None)
         card_id = request.data.get('card_id')
+        due_date = request.data.get('due_date')
 
         card = Card.objects.filter(pk=card_id, list__board__users__in=[request.user])
         card = get_object_or_404(card)
 
-        for item in [description, title, status]:
+        for item in [description, title, status, due_date]:
             if item is not None:
                 setattr(card, item, item)
         card.save()
