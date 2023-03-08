@@ -30,12 +30,12 @@ class CreateList(APIView):
         title = request.data.get('title')
         board = get_object_or_404(Board, pk=board_id)
         list_order = List.objects.filter(board=board).count()
-        list_obj = List.create(
+        list_obj = List.objects.create(
             board=board,
             title=title,
             order=list_order
         )
-        return Response(ListSerializer(list_obj))
+        return Response(ListSerializer(list_obj).data)
 
 
 class UpdateList(APIView):

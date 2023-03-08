@@ -17,7 +17,7 @@ urlpatterns = [
 
     path('card/create', CreateCard.as_view()),
     path('card/update', UpdateCard.as_view()),
-    path('card/delete', DeleteCard.as_view()),
+    path('card/delete/<pk>', DeleteCard.as_view()),
     path('card/read', ListCards.as_view()),
 
 ]
