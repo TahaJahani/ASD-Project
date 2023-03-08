@@ -1,6 +1,8 @@
+import uuid
+from datetime import datetime, timedelta
+
 from django.contrib.auth.models import User
 from django.db import models
-import uuid
 
 
 class Board(models.Model):
@@ -22,6 +24,7 @@ class Card(models.Model):
     order = models.IntegerField(default=0)
     status = models.CharField(max_length=100)
     description = models.CharField(max_length=10000, default=None)
+    due_date = models.DateTimeField(default=datetime.now() + timedelta(days=1))
 
     def to_dict(self):
         return {
