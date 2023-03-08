@@ -43,7 +43,7 @@ class UpdateCard(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def psot(self, request):
+    def post(self, request):
         description = request.data.get('description', None)
         title = request.data.get('title', None)
         status = request.data.get('status', None)
