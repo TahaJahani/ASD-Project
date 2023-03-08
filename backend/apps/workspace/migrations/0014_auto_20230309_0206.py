@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='card',
             name='description',
-            field=models.CharField(default=None, max_length=10000),
+            field=models.CharField(default=None, max_length=10000, null=True),
         ),
     ]

@@ -22,7 +22,7 @@ class Card(models.Model):
     list = models.ForeignKey(List, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
-    description = models.CharField(max_length=10000, default=None)
+    description = models.CharField(max_length=10000, default=None, null=True)
     due_date = models.DateTimeField(default=datetime.now() + timedelta(days=1))
 
 
