@@ -1,6 +1,8 @@
+import uuid
+from datetime import datetime, timedelta
+
 from django.contrib.auth.models import User
 from django.db import models
-import uuid
 
 
 class Board(models.Model):
@@ -21,6 +23,7 @@ class Card(models.Model):
     title = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
     description = models.CharField(max_length=10000, default=None, null=True)
+    due_date = models.DateTimeField(default=datetime.now() + timedelta(days=1))
 
 
 class JoinRequest(models.Model):
