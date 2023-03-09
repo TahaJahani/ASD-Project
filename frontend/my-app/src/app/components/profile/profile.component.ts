@@ -25,11 +25,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getMe().subscribe((data) => {
+      console.log(data);
       this.user = data;
+      this.first_name = this.user.first_name!;
+      this.last_name = this.user.last_name!;
+      this.email = this.user.email!;
     });
-    this.first_name = this.user.first_name!;
-    this.last_name = this.user.last_name!;
-    this.email = this.user.email!;
   }
 
   onSubmit() {

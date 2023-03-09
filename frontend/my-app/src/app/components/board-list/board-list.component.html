@@ -1,7 +1,9 @@
 <mat-drawer-container class="my-container">
   <mat-drawer #drawer class="board-drawer" mode="push" position="start">
     <h2 class="header-drawer">Boards</h2>
-    <mat-icon class="library-add">library_add</mat-icon>
+    <mat-icon class="library-add" mat-raised-button (click)="openDialog()"
+      >library_add</mat-icon
+    >
     <mat-nav-list>
       <mat-list-item
         (click)="changeBgColor(i)"
@@ -15,12 +17,17 @@
             matLine
             [routerLink]="['/boards', board.id]"
           >
-            <h2>
+            <h2 style="display: inline">
               {{ board.title }}
             </h2>
-            <p class="board-description">
-              {{ board.description }}
-            </p>
+            <div style="display: inline; float: right">
+              <mat-icon class="edit-icon" (click)="edit(board.id)"
+                >edit</mat-icon
+              >
+              <mat-icon class="delete-icon" (click)="delete(board.id)"
+                >delete</mat-icon
+              >
+            </div>
           </a>
         </div>
       </mat-list-item>

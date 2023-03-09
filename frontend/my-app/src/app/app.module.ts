@@ -36,6 +36,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { MatSpinnerOverlayComponent } from './components/mat-spinner-overlay/mat-spinner-overlay.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileNavItemComponent } from './components/profile-nav-item/profile-nav-item.component';
+import { BoardDialogComponent } from './components/board-dialog/board-dialog.component';
 
 const resolvedBoardTitle: ResolveFn<string> = () =>
   Promise.resolve('Board detail');
@@ -56,6 +57,7 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
     MatSpinnerOverlayComponent,
     ProfileComponent,
     ProfileNavItemComponent,
+    BoardDialogComponent,
   ],
   imports: [
     BrowserModule,
