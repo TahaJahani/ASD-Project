@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../../services/user-service.service';
@@ -12,11 +13,16 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
+    private localStorageService: LocalStorageService,
     private userService: UserServiceService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.localStorageService.get('token')) {
+      this.router.navigate(['/boards']);
+    }
+  }
 
   signUp(user: User) {
     this.loading = true;

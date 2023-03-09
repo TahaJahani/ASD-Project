@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class UserServiceService {
-  private apiURL = 'http://37.32.13.83/auth';
+  private apiURL = 'http://37.32.13.83:8000/auth';
 
   constructor(private http: HttpClient) {}
 
@@ -27,6 +27,22 @@ export class UserServiceService {
 
   logout(): Observable<any> {
     const url = `${this.apiURL}/logout`;
+    let token = `token ${localStorage.getItem('token')}`;
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.post(url, {}, httpOptions);
+  }
+
+  getMe(): Observable<any> {
+    const url = `${this.apiURL}/get-me`;
+    let token = `token ${localStorage.getItem('token')}`;
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+
+    return this.http.get(url, httpOptions);
+  }
+
+  updateUser(user: User): Observable<any> {
+    const url = `${this.apiURL}/edit`;
     let token = `token ${localStorage.getItem('token')}`;
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 

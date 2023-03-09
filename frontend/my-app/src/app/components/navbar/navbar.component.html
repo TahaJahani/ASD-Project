@@ -1,20 +1,28 @@
 <div>
   <ul class="nav-tabs">
     <li>
-      <app-navbar-item text="Homepage" link=""></app-navbar-item>
-      <app-navbar-item text="Boards" link="/boards"></app-navbar-item>
+      <div>
+        <app-navbar-item
+          *ngIf="!isLoggedIn"
+          text="Homepage"
+          link=""
+        ></app-navbar-item>
+        <app-navbar-item text="Boards" link="/boards"></app-navbar-item>
+        <app-navbar-item
+          *ngIf="isLoggedIn"
+          class="float-end"
+          text="Logout"
+          color="#ff2312"
+          link="/logout"
+        ></app-navbar-item>
+      </div>
       <app-navbar-item
         *ngIf="!isLoggedIn"
         class="float-end"
         text="Login/Register"
         link="/login"
       ></app-navbar-item>
-      <app-navbar-item
-        *ngIf="isLoggedIn"
-        class="float-end"
-        text="Logout"
-        link="/logout"
-      ></app-navbar-item>
+      <app-profile-nav-item *ngIf="isLoggedIn"> </app-profile-nav-item>
     </li>
   </ul>
 </div>

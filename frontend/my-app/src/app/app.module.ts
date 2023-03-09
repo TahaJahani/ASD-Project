@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ResolveFn, RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -12,6 +12,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
@@ -26,6 +34,8 @@ import { BoardListComponent } from './components/board-list/board-list.component
 import { BoardDetailsComponent } from './components/board-details/board-details.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MatSpinnerOverlayComponent } from './components/mat-spinner-overlay/mat-spinner-overlay.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileNavItemComponent } from './components/profile-nav-item/profile-nav-item.component';
 
 const resolvedBoardTitle: ResolveFn<string> = () =>
   Promise.resolve('Board detail');
@@ -44,10 +54,13 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
     BoardDetailsComponent,
     LogoutComponent,
     MatSpinnerOverlayComponent,
+    ProfileComponent,
+    ProfileNavItemComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
     RouterModule.forRoot([
@@ -72,6 +85,11 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
         component: LogoutComponent,
       },
       {
+        path: 'profile',
+        title: 'tprofile',
+        component: ProfileComponent,
+      },
+      {
         path: 'boards',
         title: 'tre-boards',
         component: BoardListComponent,
@@ -94,6 +112,14 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
     MatIconModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSortModule,
+    MatTableModule,
+    MatRadioModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatDialogModule,
   ],
   providers: [],

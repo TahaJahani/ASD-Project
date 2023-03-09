@@ -6,6 +6,12 @@ ul {
   background-color: rgb(131, 187, 251);
 }
 
+li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .float-end {
   float: right;
 }
