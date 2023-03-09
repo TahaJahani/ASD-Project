@@ -1,0 +1,25 @@
+name: Angular CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+    strategy:
+      max-parallel: 4
+
+    steps:
+    - name: Pull Github
+      run: |
+        cd ~/ASD-Project/frontend && git pull
+    - name: Install Dependencies
+      run: |
+        cd ~/ASD-Project/frontend/my-app && npm install
+    - name: Build App
+      run: |
+        cd ~/ASD-Project/frontend/my-app && ng build
