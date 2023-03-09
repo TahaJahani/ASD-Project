@@ -127,11 +127,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 APPEND_SLASH = True
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
-}
