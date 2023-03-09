@@ -1,24 +1,25 @@
 from django.test import TestCase
 from django.urls import reverse
+from rest_framework.test import APIClient
 
 from .models import *
 
 
 class BoardTestCase(TestCase):
+
     def setUp(self):
-        user = User.objects.create(username='Ali')
+        user = User.objects.create(username='client', password='secret')
         Board.objects.create(title='board',
-                             background='green',
-                             visibility='public',
+                             color='green',
                              owner=user)
 
     def test_board(self):
         board = Board.objects.get(title="board")
         self.assertEqual(board.title, 'board')
 
-    def test_view1(self):
-        response = self.client.get(reverse('create-board'),
-                                   {'title': 'title1', 'visibility': 'v1', 'background': 'red'}
-                                   )
-        print(response)
-        self.assertEqual(response.status_code, 200)
+
+    def test_board_get(self):
+        client = APIClient()
+        client.login(username='client', password='secret')
+        response = client.get('/workspace/board/list')
+        print(response.__dict__)
