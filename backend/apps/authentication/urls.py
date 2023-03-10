@@ -9,6 +9,8 @@ urlpatterns = [
     path('sign-up', SignUpView.as_view()),
     path('logout', LogoutView.as_view()),
     path('get-me', GetMeView.as_view()),
-    path('edit', EditProfileView.as_view())
+    path('edit', EditProfileView.as_view()),
+    path('request-reset', RequestResetPassword.as_view()),
+    path('reset-password', ChangePassword.as_view())
 ]
 
