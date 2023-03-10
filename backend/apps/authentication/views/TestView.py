@@ -7,5 +7,5 @@ class TestView(APIView):
 
     def get(self, request):
         return Response(data={
-            "message": "Route Is Working Just Fine!"
+            "message": "Route Is Working Just Fine!, Edited!"
         })

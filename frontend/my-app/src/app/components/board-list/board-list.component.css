@@ -76,3 +76,12 @@ h1 {
   height: 35px;
   margin: 0;
 }
+
+.delete-icon {
+  color: #f44336;
+}
+
+.delete-icon,
+.edit-icon {
+  z-index: 2;
+}
