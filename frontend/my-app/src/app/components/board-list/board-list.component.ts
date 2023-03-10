@@ -62,11 +62,46 @@ export class BoardListComponent implements OnInit {
   }
 
   edit(id: number | undefined) {
-    console.log('edit board with id: ' + id);
+    const dialogRef = this.dialog.open(BoardDialogComponent, {
+      data: { name: this.name },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.name = result;
+      if (this.name) {
+        let lastBoard = this.boards.find((board) => board.id === id);
+        const boardToBeEdited: Board = {
+          id: id,
+          title: this.name,
+          color: '#ffffff',
+        };
+        this.boardService.updateBoard(boardToBeEdited).subscribe(
+          (board) => {
+            alert('Board created successfully');
+            this.boards = this.boards.filter((board) => board.id !== id);
+            this.boards.push(boardToBeEdited);
+            this.bgColor.push('aliceblue');
+          },
+          (error) => {
+            console.log(error);
+            alert('Error creating board');
+          }
+        );
+      }
+    });
   }
 
   delete(id: number | undefined) {
-    console.log('delete board with id: ' + id);
+    this.boardService.deleteBoard(id!).subscribe(
+      (data) => {
+        console.log(data);
+        this.boards = this.boards.filter((board) => board.id !== id);
+        this.bgColor = this.bgColor.filter((color) => color !== 'royalblue');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   changeBgColor(i: number) {
