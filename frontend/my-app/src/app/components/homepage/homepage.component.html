@@ -1,20 +1,25 @@
-<div class="container">
-  <h1>Welcome to Trel-Low</h1>
-  <p>New trello like application for you and your team!</p>
-  <p>
-    There is absolutly nothing new in our app! we just wanted to release it!
-    Enjoy :)
-  </p>
-  <div class="flex-row">
-    <div class="flex-col">
-      <strong>Login to Continue!</strong>
-      <button class="btn" color="primary" routerLink="/login">Login</button>
+<div class="homepage">
+  <div class="container flex-item">
+    <h1>Welcome to <span id="fire-text">Trel-Low</span></h1>
+    <p>New trello like application for you and your team!</p>
+    <p>
+      There is absolutly nothing new in our app! we just wanted to release it!
+      Enjoy :)
+    </p>
+    <div class="flex-row">
+      <div class="flex-col">
+        <strong>Login to Continue!</strong>
+        <button class="btn" color="primary" routerLink="/login">Login</button>
+      </div>
+      <div class="flex-col">
+        <strong>No Account?</strong>
+        <button class="btn" color="primary" routerLink="/register">
+          Register
+        </button>
+      </div>
     </div>
-    <div class="flex-col">
-      <strong>No Account?</strong>
-      <button class="btn" color="primary" routerLink="/register">
-        Register
-      </button>
-    </div>
+  </div>
+  <div class="flex-item">
+    <img src="assets/img/KanbanPng.png" title="Kanban Board" />
   </div>
 </div>

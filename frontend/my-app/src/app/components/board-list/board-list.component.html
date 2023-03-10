@@ -9,27 +9,26 @@
         (click)="changeBgColor(i)"
         *ngFor="let board of boards; let i = index"
         [style.background-color]="bgColor[i]"
+        [routerLink]="['/boards', board.id]"
         [style.color]="bgColor[i] === 'royalblue' ? 'white' : 'black'"
       >
-        <div class="app-board">
-          <a
-            [style.color]="bgColor[i] === 'royalblue' ? 'white' : 'black'"
-            matLine
-            [routerLink]="['/boards', board.id]"
-          >
-            <h2 style="display: inline">
-              {{ board.title }}
-            </h2>
-            <div style="display: inline; float: right">
-              <mat-icon class="edit-icon" (click)="edit(board.id)"
-                >edit</mat-icon
-              >
-              <mat-icon class="delete-icon" (click)="delete(board.id)"
-                >delete</mat-icon
-              >
-            </div>
-          </a>
+        <!-- <div class="app-board"> -->
+        <span
+          class="app-board"
+          [style.color]="bgColor[i] === 'royalblue' ? 'white' : 'black'"
+          matLine
+        >
+          <h2 style="display: inline">
+            {{ board.title }}
+          </h2>
+        </span>
+        <div style="display: inline; float: right">
+          <mat-icon class="edit-icon" (click)="edit(board.id)"> edit </mat-icon>
+          <mat-icon class="delete-icon" (click)="delete(board.id)">
+            delete
+          </mat-icon>
         </div>
+        <!-- </div> -->
       </mat-list-item>
     </mat-nav-list>
   </mat-drawer>
