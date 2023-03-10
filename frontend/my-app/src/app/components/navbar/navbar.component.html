@@ -7,7 +7,11 @@
           text="Homepage"
           link=""
         ></app-navbar-item>
-        <app-navbar-item text="Boards" link="/boards"></app-navbar-item>
+        <app-navbar-item
+          *ngIf="isLoggedIn"
+          text="Boards"
+          link="/boards"
+        ></app-navbar-item>
         <app-navbar-item
           *ngIf="isLoggedIn"
           class="float-end"

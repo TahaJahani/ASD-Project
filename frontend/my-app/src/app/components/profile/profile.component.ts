@@ -62,6 +62,8 @@ export class ProfileComponent implements OnInit {
       };
     }
 
+    console.log(updatedUser);
+
     this.userService.updateUser(updatedUser).subscribe(
       (data) => {
         alert('Profile updated successfully');

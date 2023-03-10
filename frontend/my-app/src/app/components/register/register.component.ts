@@ -28,11 +28,13 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     this.userService.signUp(user).subscribe(
       (res) => {
+        this.loading = false;
         console.log(res);
         alert('User created successfully');
         this.router.navigate(['/login']);
       },
       (err) => {
+        this.loading = false;
         console.log(err);
         alert('Error creating user');
       }

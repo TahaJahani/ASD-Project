@@ -46,6 +46,6 @@ export class UserServiceService {
     let token = `token ${localStorage.getItem('token')}`;
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
 
-    return this.http.post(url, {}, httpOptions);
+    return this.http.post(url, user, httpOptions);
   }
 }

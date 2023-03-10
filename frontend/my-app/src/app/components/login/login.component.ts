@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.userService.signIn(user).subscribe(
       (data) => {
+        this.loading = false;
         console.log(data);
         alert(`Welcome ${user.username}!`);
         this.localStorageService.set('token', data.token);
@@ -37,7 +38,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/boards']);
       },
       (error) => {
+        this.loading = false;
         console.log('error: ', error);
+        alert('Wrong Username Password');
+        this.router.navigate(['/login']);
       }
     );
   }
