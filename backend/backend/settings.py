@@ -83,10 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'asddb',
-        'USER': 'postgres',
+        'USER': 'developer',
         'PASSWORD': 'thisismysecurepassword',
         'HOST': 'localhost',
-        'PORT': '6556',
+        'PORT': '5432',
     }
 }
 
@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UCT'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 

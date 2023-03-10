@@ -1,6 +1,7 @@
+import uuid
+
 from django.contrib.auth.models import User
 from django.db import models
-import uuid
 
 
 class Board(models.Model):
@@ -10,17 +11,18 @@ class Board(models.Model):
     users = models.ManyToManyField(to=User, related_name='boards')
 
 
-class List(models.Model):
+class CardsList(models.Model):
     board = models.ForeignKey(Board, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
 
 
 class Card(models.Model):
-    list = models.ForeignKey(List, on_delete=models.PROTECT)
+    card_list = models.ForeignKey(CardsList, on_delete=models.PROTECT)
     title = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
     description = models.CharField(max_length=10000, default=None, null=True)
+    due_date = models.DateTimeField(default=None, null=True)
 
 
 class JoinRequest(models.Model):
