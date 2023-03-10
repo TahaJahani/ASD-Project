@@ -17,7 +17,7 @@ class ListLists(ListAPIView):
     def get_queryset(self):
         board_id = self.request.GET.get('board_id')
         user = self.request.user
-        lists = List.objects.filter(board_id=board_id, board__users__in=[user]).all()
+        lists = CardsList.objects.filter(board_id=board_id, board__users__in=[user]).all()
         return lists
 
 
@@ -29,8 +29,8 @@ class CreateList(APIView):
         board_id = request.data.get('board_id')
         title = request.data.get('title')
         board = get_object_or_404(Board, pk=board_id)
-        list_order = List.objects.filter(board=board).count()
-        list_obj = List.objects.create(
+        list_order = CardsList.objects.filter(board=board).count()
+        list_obj = CardsList.objects.create(
             board=board,
             title=title,
             order=list_order
@@ -46,7 +46,7 @@ class UpdateList(APIView):
         list_id = request.data.get('list_id')
         title = request.data.get('title')
 
-        List.objects.filter(pk=list_id, board__users__in=[request.user]).update(
+        CardsList.objects.filter(pk=list_id, board__users__in=[request.user]).update(
             title=title
         )
 
@@ -58,5 +58,5 @@ class DeleteList(APIView):
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
-        List.objects.filter(pk=pk, board__users__in=[request.user]).delete()
+        CardsList.objects.filter(pk=pk, board__users__in=[request.user]).delete()
         return Response({"message": "List deleted"})
