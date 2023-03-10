@@ -1,11 +1,13 @@
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
-from rest_framework.response import Response
-from apps.workspace.models import *
-from django.shortcuts import get_object_or_404
+import datetime
 
+from django.shortcuts import get_object_or_404
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from apps.workspace.models import *
 from apps.workspace.serializers.CardSerializer import CardSerializer
 
 
@@ -27,14 +29,15 @@ class CreateCard(APIView):
 
     def post(self, request):
         list_id = request.data.get('list_id')
-        related_list = List.objects.filter(pk=list_id, board__users__in=[request.user])
+        related_list = CardsList.objects.filter(pk=list_id, board__users__in=[request.user])
         related_list = get_object_or_404(related_list)
         card_title = request.data.get('title')
         card_order = Card.objects.filter(list=related_list).count()
         card = Card.objects.create(
-            list=related_list,
+            card_list=related_list,
             order=card_order,
-            title=card_title
+            title=card_title,
+            due_date=datetime.datetime.now() + datetime.timedelta(days=1)
         )
         return Response(CardSerializer(card).data)
 

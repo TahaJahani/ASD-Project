@@ -12,6 +12,7 @@ $ sudo docker-compose up -d
 $ sudo docker exec -it backend_postgres_1 bash
 $ psql -U postgres
 $ create database db
+$ cockAndBallTorture
 ```
 Then exit from the shell and inside a new terminal, execute following commands to run the migrations:
 ```shell
