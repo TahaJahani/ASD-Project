@@ -4,4 +4,10 @@
   </h1>
   <hr />
 </header>
-<div></div>
+<div class="flex-row">
+  <div class="add-list" (click)="openDialog()">
+    <h1>Add List</h1>
+  </div>
+  <!-- list of <app-list>s from lists -->
+  <app-list *ngFor="let list of lists" [list]="list"> </app-list>
+</div>

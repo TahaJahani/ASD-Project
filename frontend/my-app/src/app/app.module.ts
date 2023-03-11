@@ -38,6 +38,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileNavItemComponent } from './components/profile-nav-item/profile-nav-item.component';
 import { BoardDialogComponent } from './components/board-dialog/board-dialog.component';
 import { ListComponent } from './components/list/list.component';
+import { ListDialogComponent } from './components/list-dialog/list-dialog.component';
 
 const resolvedBoardTitle: ResolveFn<string> = () =>
   Promise.resolve('Board detail');
@@ -60,6 +61,7 @@ const resolvedBoardTitle: ResolveFn<string> = () =>
     ProfileNavItemComponent,
     BoardDialogComponent,
     ListComponent,
+    ListDialogComponent,
   ],
   imports: [
     BrowserModule,

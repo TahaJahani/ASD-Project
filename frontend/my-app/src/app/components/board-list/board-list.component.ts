@@ -77,14 +77,20 @@ export class BoardListComponent implements OnInit {
         };
         this.boardService.updateBoard(boardToBeEdited).subscribe(
           (board) => {
-            alert('Board created successfully');
-            this.boards = this.boards.filter((board) => board.id !== id);
-            this.boards.push(boardToBeEdited);
-            this.bgColor.push('aliceblue');
+            alert('Board edited successfully');
+            // replace the last boards with new one that the board title update
+            this.boards.forEach((board) => {
+              if (board.id === id) {
+                board.title = this.name;
+              }
+            });
+            // this.boards = this.boards.filter((board) => board.id !== id);
+            // this.boards.push(boardToBeEdited);
+            // this.bgColor.push('aliceblue');
           },
           (error) => {
             console.log(error);
-            alert('Error creating board');
+            alert('Error editing board');
           }
         );
       }

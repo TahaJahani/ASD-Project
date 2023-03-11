@@ -2,8 +2,8 @@ import { Card } from './Card';
 
 export interface List {
   id?: number;
-  name: string;
-  description: string;
-  board: number;
+  title?: string;
+  description?: string;
+  board_id?: number;
   cards?: Card[];
 }
