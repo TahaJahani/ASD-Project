@@ -85,7 +85,7 @@ class CardTestCase(TestCase):
         card_list = CardsList.objects.create(board=board, title='card_list',
                                              order=CardsList.objects.filter(board=board).count())
         Card.objects.create(card_list=card_list, title='card', order=Card.objects.filter(card_list=card_list).count(),
-                            due_date=datetime.datetime.now() + datetime.timedelta(days=1), description='hi')
+                            due_date=datetime.now() + timedelta(days=1), description='hi')
 
     def test_list(self):
         card = Card.objects.get(title="card")
